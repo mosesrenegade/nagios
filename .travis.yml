@@ -1,0 +1,13 @@
+sudo:
+  - required
+language:
+  - bash
+services:
+  - docker
+
+install:
+  - git clone https://github.com/mosesrenegade/nagios
+
+script:
+  - ./build.sh
+
