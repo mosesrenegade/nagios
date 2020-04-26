@@ -26,7 +26,7 @@ ENV NRPE_BRANCH            nrpe-3.2.1
 RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set-selections  && \
     echo postfix postfix/mynetworks string "127.0.0.0/8" | debconf-set-selections            && \
     echo postfix postfix/mailname string ${NAGIOS_FQDN} | debconf-set-selections             && \
-    apt-get update && apt-get install -y    \
+    apt-get update && apt-get install -y    \ 
         apache2                             \
         apache2-utils                       \
         autoconf                            \
@@ -34,14 +34,19 @@ RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set
         bc                                  \
         bsd-mailx                           \
         build-essential                     \
+        dc                                  \
         dnsutils                            \
         fping                               \
+        gawk                                \
+        gcc                                 \
         gettext                             \
         git                                 \
         gperf                               \
         iputils-ping                        \
         jq                                  \
         libapache2-mod-php                  \
+        libapache2-mod-php7.2               \
+        libc6                               \
         libcache-memcached-perl             \
         libcgi-pm-perl                      \
         libdbd-mysql-perl                   \
@@ -49,9 +54,11 @@ RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set
         libdbi-perl                         \
         libfreeradius-dev                   \
         libgdchart-gd2-xpm-dev              \
+        libgd-dev                           \
         libgd-gd2-perl                      \
         libjson-perl                        \
         libldap2-dev                        \
+        libmcrypt-dev                       \
         libmysqlclient-dev                  \
         libnagios-object-perl               \
         libnet-snmp-perl                    \
@@ -64,6 +71,7 @@ RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set
         libssl-dev                          \
         libswitch-perl                      \
         libwww-perl                         \
+        make                                \
         m4                                  \
         netcat                              \
         parallel                            \
@@ -78,6 +86,7 @@ RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set
         snmpd                               \
         snmp-mibs-downloader                \
         unzip                               \
+        wget                                \
         python                              \
                                                 && \
     apt-get clean && rm -Rf /var/lib/apt/lists/*
