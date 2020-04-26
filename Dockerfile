@@ -34,6 +34,7 @@ RUN echo postfix postfix/main_mailer_type string "'Internet Site'" | debconf-set
         bc                                  \
         bsd-mailx                           \
         build-essential                     \
+        curl                                \
         dc                                  \
         dnsutils                            \
         fping                               \
@@ -253,5 +254,7 @@ RUN echo "ServerName ${NAGIOS_FQDN}" > /etc/apache2/conf-available/servername.co
 EXPOSE 80
 
 VOLUME "${NAGIOS_HOME}/var" "${NAGIOS_HOME}/etc" "/var/log/apache2" "/opt/Custom-Nagios-Plugins" "/opt/nagiosgraph/var" "/opt/nagiosgraph/etc"
+
+HEALTHCHECK --interval=5s --timeout=2s --retries=20 CMD /opt/nagios/healthcheck.sh || exit 1
 
 CMD [ "/usr/local/bin/start_nagios" ]
