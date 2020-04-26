@@ -157,17 +157,18 @@ RUN cd /tmp                                                                  && 
     make clean                                                               && \
     cd /tmp && rm -Rf nrpe
 
-RUN cd /tmp                                                          && \
-    git clone https://git.code.sf.net/p/nagiosgraph/git nagiosgraph  && \
-    cd nagiosgraph                                                   && \
+RUN cd /tmp                                                                 && \
+    git clone https://git.code.sf.net/p/nagiosgraph/git nagiosgraph         && \
+    cd nagiosgraph                                                          && \
     ./install.pl --install                                      \
         --prefix /opt/nagiosgraph                               \
         --nagios-user ${NAGIOS_USER}                            \
         --www-user ${NAGIOS_USER}                               \
         --nagios-perfdata-file ${NAGIOS_HOME}/var/perfdata.log  \
         --nagios-cgi-url /cgi-bin                               \
-                                                                     && \
-    cp share/nagiosgraph.ssi ${NAGIOS_HOME}/share/ssi/common-header.ssi && \
+                                                                             && \
+    cp share/nagiosgraph.ssi ${NAGIOS_HOME}/share/ssi/common-header.ssi      && \
+    chown -R ${NAGIOS_USER}:${NAGIOS_GROUP} /opt/nagiosgraph/etc/ngshared.pm &&\
     cd /tmp && rm -Rf nagiosgraph
 
 RUN cd /opt                                                                         && \

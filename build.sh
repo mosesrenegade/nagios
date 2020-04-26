@@ -2,7 +2,6 @@
 set -e
 
 DOCKER_RUN_IMAGE=nagios
-
 docker build -t "${DOCKER_RUN_IMAGE}" .
 
 docker images
